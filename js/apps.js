@@ -46,7 +46,7 @@ class Game {
         this.lossStreakDisplay = document.getElementById('lossStreakDisplay')
 
         this.gameSettings = {
-            gamePlay: true, //test with true then set to false
+            gamePlay: false, //test with true then set to false
             rolls: 0,
             point: 0,
             totalWins: 0,
@@ -59,9 +59,32 @@ class Game {
     }
 
     init(){
-        
+        this.resetGame()
+        this.changeColor()
+        const settings = this.gameSettings
+        this.message.innerText = `Lets start the game!`
+        this.rollCountDisplay.innerText = settings.rolls
+        this.dieDisplay1.innerText = ''
+        this.dieDisplay2.innerText = ''
+        this.pointDisplay.innerText = ''
+        this.rollTotalDisplay.innerText = ''
+
+
         this.toggleRollBtn(this.gameSettings.gamePlay)
         this.rollBtn.addEventListener('click', this.rollDice)
+    }
+
+
+    // 7 
+    changeColor(){
+        let color = this.message.classList[0]
+
+        if(this.message.classList.contains(color)){
+            this.message.classList.remove(color)
+            this.message.classList.add('black')
+        }
+        
+        
     }
 
 
@@ -124,6 +147,33 @@ class Game {
 
         this.checkWin(total, rolls)
     }
+
+
+    // 6
+    resetGame(){
+        this.rollBtn.removeEventListener('click', this.rollDice)
+
+        // let color
+        
+        // if(color == 'green' || color == 'red'){
+        //     if(this.message.classList.contains(color)){
+        //         this.message.classList.remove(color)
+        //         this.message.classList.add('black')
+        //     }
+        // } 
+
+        return this.gameSettings = {
+            gamePlay: true,
+            rolls: 0,
+            point: 0,
+            totalWins: this.gameSettings.totalWins,
+            totalLosses: this.gameSettings.totalLosses,
+            winStreak: this.gameSettings.winStreak,
+            lossStreak: this.gameSettings.lossStreak,
+            win: false
+        }
+    }
+
 
 
     //2
